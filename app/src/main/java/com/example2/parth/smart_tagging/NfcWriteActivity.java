@@ -284,7 +284,7 @@ public class NfcWriteActivity extends Activity {
                         s1=new SimpleDateFormat("dMyyhms");
                         s=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                         LogKey="Log "+s1.format(new Date());
-                        LogValue="Tag Written at: "+s.format(new Date())+" by "+uname+" Content: "+msg;
+                        LogValue="Tag Written at: "+s.format(new Date())+" by "+uname+" Content: "+writeText;
                         s.format(new Date());
                         fetcher2.put(LogKey,LogValue);
                         reference_logs.updateChildren(fetcher2);
