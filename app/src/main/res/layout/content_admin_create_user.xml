@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/AdminCreateUserActivityRL"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example2.parth.smart_tagging.AdminCreateUserActivity"
+    tools:showIn="@layout/activity_admin_create_user">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAlignment="center"
+        android:text="@string/AdminCreateUserActivityLT1"
+        android:id="@+id/AdminCreateUserActivityLT1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET1"
+        android:hint="@string/AdminCreateUserActivityET1"
+        android:textAlignment="center"
+        android:layout_below="@+id/AdminCreateUserActivityLT1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET2"
+        android:hint="@string/AdminCreateUserActivityET2"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminCreateUserActivityET1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET3"
+        android:hint="@string/AdminCreateUserActivityET3"
+        android:textAlignment="center"
+        android:layout_below="@+id/AdminCreateUserActivityET1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET4"
+        android:hint="@string/AdminCreateUserActivityET4"
+        android:textAlignment="center"
+        android:layout_below="@+id/AdminCreateUserActivityET3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET5"
+        android:hint="@string/AdminCreateUserActivityET5"
+        android:textAlignment="center"
+        android:layout_below="@+id/AdminCreateUserActivityET4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET6"
+        android:hint="@string/AdminCreateUserActivityET6"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminCreateUserActivityET5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminCreateUserActivityMT1"
+        android:textAlignment="center"
+        android:id="@+id/AdminCreateUserActivityMT1"
+        android:layout_below="@+id/AdminCreateUserActivityET5"
+        android:layout_alignRight="@+id/AdminCreateUserActivityET5"
+        android:layout_alignEnd="@+id/AdminCreateUserActivityET5"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/AdminCreateUserActivityET6"
+        android:layout_alignStart="@+id/AdminCreateUserActivityET6"
+        android:layout_alignTop="@+id/AdminCreateUserActivityMT1"
+        android:id="@+id/AdminCreateUserActivityRG1">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG1RB1"
+            android:text="@string/AdminCreateUserActivityRG1RB1"
+            android:textAlignment="center"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG1RB2"
+            android:text="@string/AdminCreateUserActivityRG1RB2"
+            android:textAlignment="center"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG1RB3"
+            android:text="@string/AdminCreateUserActivityRG1RB3"
+            android:textAlignment="center"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminCreateUserActivityMT2"
+        android:textAlignment="center"
+        android:id="@+id/AdminCreateUserActivityMT2"
+        android:layout_below="@+id/AdminCreateUserActivityRG1"
+        android:layout_alignLeft="@+id/AdminCreateUserActivityMT1"
+        android:layout_alignStart="@+id/AdminCreateUserActivityMT1"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/AdminCreateUserActivityRG2"
+        android:layout_below="@+id/AdminCreateUserActivityRG1"
+        android:layout_alignLeft="@+id/AdminCreateUserActivityRG1"
+        android:layout_alignStart="@+id/AdminCreateUserActivityRG1">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG2RB1"
+            android:text="@string/AdminCreateUserActivityRG2RB1"
+            android:textAlignment="center"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG2RB2"
+            android:text="@string/AdminCreateUserActivityRG2RB2"
+            android:textAlignment="center"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG2RB3"
+            android:text="@string/AdminCreateUserActivityRG2RB3"
+            android:textAlignment="center"/>
+    </RadioGroup>
+
+
+    <EditText
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminCreateUserActivityET7"
+        android:hint="@string/AdminCreateUserActivityET7"
+        android:textAlignment="center"
+        android:layout_below="@+id/AdminCreateUserActivityRG2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminCreateUserActivityB1"
+        android:textAlignment="center"
+        android:id="@+id/AdminCreateUserActivityB1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/AdminCreateUserActivityLT1"
+        android:layout_alignStart="@+id/AdminCreateUserActivityLT1"
+        android:onClick="onClickAdminCreateUserActivityGoBack"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminCreateUserActivityB2"
+        android:textAlignment="center"
+        android:id="@+id/AdminCreateUserActivityB2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/AdminCreateUserActivityRG2"
+        android:layout_alignStart="@+id/AdminCreateUserActivityRG2"
+        android:onClick="onClickAdminCreateUserActivityCreate"/>
+
+
+</RelativeLayout>

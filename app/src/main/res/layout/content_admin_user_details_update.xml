@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/AdminUserDetailsUpdateActivityRL"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example2.parth.smart_tagging.AdminUserDetailsUpdateActivity"
+    tools:showIn="@layout/activity_admin_user_details_update">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/AdminUserDetailsUpdateActivityLT1"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityLT1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT1"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT1"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityLT1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT2"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT2"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityMT1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT3"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT3"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityMT2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT4"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT4"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityMT3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT5"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT5"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT6"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT6"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityMT5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT7"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT7"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityMT6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT8"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT8"
+        android:layout_below="@+id/AdminUserDetailsUpdateActivityMT7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET1"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminUserDetailsUpdateActivityMT1"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityLT1"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityLT1"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET2"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminUserDetailsUpdateActivityMT2"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityET1"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityET1"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET3"
+        android:textAlignment="center"
+        android:layout_above="@+id/AdminUserDetailsUpdateActivityMT4"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityET2"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityET2"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET4"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminUserDetailsUpdateActivityMT4"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityLT1"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityLT1"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminUserDetailsUpdateActivityB1"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityB1"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminUserDetailsUpdateActivityGoBack"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminUserDetailsUpdateActivityB2"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityB2"
+        android:layout_above="@+id/AdminUserDetailsUpdateActivityB1"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminUserDetailsUpdateActivityUpdate"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET5"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminUserDetailsUpdateActivityMT5"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityET4"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityET4"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET6"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/AdminUserDetailsUpdateActivityMT6"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityLT1"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityLT1"/>
+
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/AdminUserDetailsUpdateActivityET7"
+        android:textAlignment="center"
+        android:layout_above="@+id/AdminUserDetailsUpdateActivityMT8"
+        android:layout_alignRight="@+id/AdminUserDetailsUpdateActivityET6"
+        android:layout_alignEnd="@+id/AdminUserDetailsUpdateActivityET6"/>
+
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/AdminUserDetailsUpdateActivityMT9"
+        android:textAlignment="center"
+        android:id="@+id/AdminUserDetailsUpdateActivityMT9"
+        android:layout_alignBottom="@+id/AdminUserDetailsUpdateActivityMT8"
+        android:layout_alignLeft="@+id/AdminUserDetailsUpdateActivityET7"
+        android:layout_alignStart="@+id/AdminUserDetailsUpdateActivityET7"/>
+
+
+</RelativeLayout>

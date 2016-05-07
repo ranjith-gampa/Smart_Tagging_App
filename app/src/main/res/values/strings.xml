@@ -1,0 +1,131 @@
+<resources>
+
+
+    <string name="app_name">Smart_Tagging</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="title_activity_smart__tagging__application">Smart_Tagging_Application</string>
+    <string name="AdminLogInActivityLT1">SMART TAGGING</string>
+    <string name="AdminLogInActivityB1">Sign Up</string>
+    <string name="AdminLogInActivityB2">Log In</string>
+    <string name="AdminLogInActivityB3">Exit</string>
+    <string name="AdminLogInActivityB4">Forgot Credentials</string>
+    <string name="AdminLogInActivityLT2">LOG IN</string>
+    <string name="AdminLogInActivityET1">ENVIRONMENT</string>
+    <string name="AdminLogInActivityET2">USERNAME</string>
+    <string name="AdminLogInActivityET3">PASSWORD</string>
+
+
+    <string name="title_activity_admin_sign_up">AdminSignUpActivity</string>
+    <string name="AdminSignUpActivityLT1">SIGN UP</string>
+    <string name="AdminSignUpActivityET1">FIRST NAME</string>
+    <string name="AdminSignUpActivityET2">LAST NAME</string>
+    <string name="AdminSignUpActivityET3">MAIL</string>
+    <string name="AdminSignUpActivityET4">PHONE</string>
+    <string name="AdminSignUpActivityET5">USERNAME</string>
+    <string name="AdminSignUpActivityET6">PASSWORD</string>
+    <string name="AdminSignUpActivityMT1">TEMPLATE:  </string>
+    <string name="AdminSignUpActivityRB1">HOSPITAL</string>
+    <string name="AdminSignUpActivityRB2">DATA CENTER</string>
+    <string name="AdminSignUpActivityRB3">MUSEUM</string>
+    <string name="AdminSignUpActivityET7">APP NAME</string>
+    <string name="AdminSignUpActivityB1">BACK</string>
+    <string name="AdminSignUpActivityB2">SIGN UP</string>
+
+
+    <string name="title_activity_admin_home">AdminHomeActivity</string>
+    <string name="AdminHomeActivityST1"> </string>
+    <string name="AdminHomeActivityST2"> </string>
+    <string name="AdminHomeActivityST3">HOME</string>
+    <string name="AdminHomeActivityB1">CREATE USER</string>
+    <string name="AdminHomeActivityB2">READ TAG</string>
+    <string name="AdminHomeActivityB3">WRITE TAG</string>
+    <string name="AdminHomeActivityB4">LIST USERS</string>
+    <string name="AdminHomeActivityB5">VIEW TAG LOGS</string>
+    <string name="AdminHomeActivityB6">UPDATE PASSWORD</string>
+    <string name="AdminHomeActivityB7">LOG OUT</string>
+
+
+    <string name="title_activity_admin_forgot_credentials">AdminForgotCredentialsActivity</string>
+    <string name="title_activity_users_home">UsersHomeActivity</string>
+
+
+    <string name="title_activity_admin_list_users">AdminListUsersActivity</string>
+    <string name="AdminListUsersActivityLT1">USERS LIST</string>
+    <string name="AdminListUsersActivityB1">BACK</string>
+
+
+    <string name="title_activity_admin_create_user">AdminCreateUserActivity</string>
+    <string name="AdminCreateUserActivityLT1">USER INFORMATION</string>
+    <string name="AdminCreateUserActivityET1">FIRST NAME</string>
+    <string name="AdminCreateUserActivityET2">LAST NAME</string>
+    <string name="AdminCreateUserActivityET3">MAIL</string>
+    <string name="AdminCreateUserActivityET4">PHONE</string>
+    <string name="AdminCreateUserActivityET5">USERNAME</string>
+    <string name="AdminCreateUserActivityET6">PASSWORD</string>
+    <string name="AdminCreateUserActivityET7">ROLE</string>
+    <string name="AdminCreateUserActivityMT1">SECTOR-1:  </string>
+    <string name="AdminCreateUserActivityMT2">SECTOR-2:  </string>
+    <string name="AdminCreateUserActivityRG1RB1">R</string>
+    <string name="AdminCreateUserActivityRG1RB2">W</string>
+    <string name="AdminCreateUserActivityRG1RB3">RW</string>
+    <string name="AdminCreateUserActivityRG2RB1">R</string>
+    <string name="AdminCreateUserActivityRG2RB2">W</string>
+    <string name="AdminCreateUserActivityRG2RB3">RW</string>
+    <string name="AdminCreateUserActivityB1">BACK</string>
+    <string name="AdminCreateUserActivityB2">CREATE</string>
+
+
+    <string name="title_activity_application_logout">ApplicationLogoutActivity</string>
+    <string name="ApplicationLogoutActivityLT1">!!! LOGGED OUT !!!</string>
+    <string name="ApplicationLogoutActivityB1">LOGIN</string>
+    <string name="ApplicationLogoutActivityB2">EXIT</string>
+    <string name="ApplicationLogoutActivityMT1">:For Logging In Again:</string>
+    <string name="title_activity_view_tag_logs">ViewTagLogsActivity</string>
+
+
+    <string name="title_activity_update_password">UpdatePasswordActivity</string>
+
+
+    <string name="title_activity_admin_user_details">AdminUserDetailsActivity</string>
+    <string name="AdminUserDetailsActivityLT1">USER DETAILS</string>
+    <string name="AdminUserDetailsActivityMT1">First Name:</string>
+    <string name="AdminUserDetailsActivityMT2">Last Name:</string>
+    <string name="AdminUserDetailsActivityMT3">Mail:</string>
+    <string name="AdminUserDetailsActivityMT4">Phone:</string>
+    <string name="AdminUserDetailsActivityMT5">Role:</string>
+    <string name="AdminUserDetailsActivityMT6">Sector-1:</string>
+    <string name="AdminUserDetailsActivityMT7">Sector-2:</string>
+    <string name="AdminUserDetailsActivityMT8">Username:</string>
+    <string name="AdminUserDetailsActivityMT9"> </string>
+    <string name="AdminUserDetailsActivityMT10"> </string>
+    <string name="AdminUserDetailsActivityMT11"> </string>
+    <string name="AdminUserDetailsActivityMT12"> </string>
+    <string name="AdminUserDetailsActivityMT13"> </string>
+    <string name="AdminUserDetailsActivityMT14"> </string>
+    <string name="AdminUserDetailsActivityMT15"> </string>
+    <string name="AdminUserDetailsActivityMT16"> </string>
+    <string name="AdminUserDetailsActivityB1">BACK</string>
+    <string name="AdminUserDetailsActivityB2">REMOVE</string>
+    <string name="AdminUserDetailsActivityB3">UPDATE</string>
+
+
+
+    <string name="title_activity_admin_user_details_update">AdminUserDetailsUpdateActivity</string>
+    <string name="AdminUserDetailsUpdateActivityLT1">UPDATE USER DETAILS</string>
+    <string name="AdminUserDetailsUpdateActivityMT1">First Name:</string>
+    <string name="AdminUserDetailsUpdateActivityMT2">Last Name:</string>
+    <string name="AdminUserDetailsUpdateActivityMT3">Mail:</string>
+    <string name="AdminUserDetailsUpdateActivityMT4">Phone:</string>
+    <string name="AdminUserDetailsUpdateActivityMT5">Role:</string>
+    <string name="AdminUserDetailsUpdateActivityMT6">Sector-1:</string>
+    <string name="AdminUserDetailsUpdateActivityMT7">Sector-2:</string>
+    <string name="AdminUserDetailsUpdateActivityMT8">Username:</string>
+    <string name="AdminUserDetailsUpdateActivityMT9"> </string>
+    <string name="AdminUserDetailsUpdateActivityB1">BACK</string>
+    <string name="AdminUserDetailsUpdateActivityB2">UPDATE</string>
+
+
+
+</resources>

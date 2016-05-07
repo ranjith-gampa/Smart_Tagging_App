@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/AdminHomeActivityRL"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example2.parth.smart_tagging.AdminHomeActivity"
+    tools:showIn="@layout/activity_admin_home">
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/AdminHomeActivityST1"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityST1"
+        android:layout_below="@+id/AdminHomeActivityST3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/AdminHomeActivityST2"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityST2"
+        android:layout_below="@+id/AdminHomeActivityST3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/AdminHomeActivityST3"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityST3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB1"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB1"
+        android:layout_marginTop="65dp"
+        android:onClick="onClickAdminHomeActivityCreateUser"
+        android:layout_below="@+id/AdminHomeActivityST1"
+        android:layout_alignLeft="@+id/AdminHomeActivityB2"
+        android:layout_alignStart="@+id/AdminHomeActivityB2" />
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB2"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB2"
+        android:layout_below="@+id/AdminHomeActivityB1"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminHomeActivityReadTag"/>
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB3"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB3"
+        android:layout_below="@+id/AdminHomeActivityB2"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminHomeActivityWriteTag"/>
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB4"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB4"
+        android:layout_below="@+id/AdminHomeActivityB3"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminHomeActivityListUsers"/>
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB5"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB5"
+        android:layout_below="@+id/AdminHomeActivityB4"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminHomeActivityViewTagLogs"/>
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB6"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB6"
+        android:layout_below="@+id/AdminHomeActivityB5"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminHomeActivityUpdatePassword"/>
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityB7"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityB7"
+        android:onClick="onClickAdminHomeActivityLogout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/AdminHomeActivityB6"
+        android:layout_alignStart="@+id/AdminHomeActivityB6"/>
+
+</RelativeLayout>
