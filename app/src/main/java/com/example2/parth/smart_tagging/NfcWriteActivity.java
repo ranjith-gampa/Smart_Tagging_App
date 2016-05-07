@@ -3,8 +3,10 @@ package com.example2.parth.smart_tagging;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.nfc.NdefMessage;
@@ -27,11 +29,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.firebase.client.Firebase;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.crypto.BadPaddingException;
@@ -65,12 +73,22 @@ public class NfcWriteActivity extends Activity {
     Long children;
     Long counters,count;
     String counter;
+    StringTokenizer st,st1;
+    String Id,env,LogKey,LogValue,uname;
+    private Map<String,Object> fetcher2;
+    private Firebase reference_logs;
+    SimpleDateFormat s,s1;
+    private SharedPreferences sharedPreferences1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_write);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        sharedPreferences1 = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
+        Firebase.setAndroidContext(this);
+        env=sharedPreferences1.getString("environment",null);
+        uname=sharedPreferences1.getString("username",null);
         textTagContent = (EditText) findViewById(R.id.textTagContent);
         textView1 = (TextView) findViewById(R.id.textView1);
         setLocale("en");
@@ -253,70 +271,27 @@ public class NfcWriteActivity extends Activity {
 
                         //msg = createNdefMessage(writeText);
                         writeNdefMessage(tag, msg);
+
+                        st=new StringTokenizer(readText,"\n");
+
+                        st1=new StringTokenizer(st.nextToken(),":");
+
+                        Log.d("InsideToken:",st1.nextToken());
+                        Id=st1.nextToken();
+                        Log.d("Id:",Id);
+                        reference_logs=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(Id).child("Logs");
+                        fetcher2=new HashMap<String, Object>();
+                        s1=new SimpleDateFormat("dMyyhms");
+                        s=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                        LogKey="Log "+s1.format(new Date());
+                        LogValue="Tag Written at: "+s.format(new Date())+" by "+uname+" Content: "+msg;
+                        s.format(new Date());
+                        fetcher2.put(LogKey,LogValue);
+                        reference_logs.updateChildren(fetcher2);
+
                         et1.setText(" ");
                     }
-                } else {
 
-                    Parcelable[] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-
-                    if (parcelables != null && parcelables.length > 0) {
-                        if ((access_control & 0x4) == 0x4) {
-                            Log.d("NFCTAG", " reading");
-
-                            String readText = null;
-                            try {
-                                readText = readTextFromMessage((NdefMessage) parcelables[0]);
-                            } catch (BadPaddingException e) {
-
-                                e.printStackTrace();
-                            } catch (InvalidKeyException e) {
-                                e.printStackTrace();
-                            } catch (IllegalBlockSizeException e) {
-                                e.printStackTrace();
-                            }
-                            if (encryption == 1) {
-                                Log.d("NFCTAG before decrypt ", readText);
-                                String tagContentDecrypt = null;
-                                try {
-                                    tagContentDecrypt = nfcSecurity.decrypt(readText.getBytes());
-                                } catch (InvalidKeyException e) {
-                                    Log.d("NFCTAG", "exception 1");
-                                    e.printStackTrace();
-                                } catch (BadPaddingException e) {
-                                    Log.d("NFCTAG", "exception 2");
-                                    e.printStackTrace();
-                                } catch (IllegalBlockSizeException e) {
-                                    Log.d("NFCTAG", "exception 3");
-                                    e.printStackTrace();
-                                } catch (NoSuchAlgorithmException e) {
-                                    e.printStackTrace();
-                                }
-                                readText = tagContentDecrypt;
-                            }
-
-                            Log.d("NFCTAG read: ", readText);
-                            //readTextFromMessage((NdefMessage)parcelables[1]);
-                            Log.d("NFCTAG", " after reading1");
-                            textView1.setText(readText);
-                            Log.d("NFCTAG", " after reading2");
-                            if (speak == 1) {
-                                t1.speak(readText, TextToSpeech.QUEUE_FLUSH, null, null);
-                            }
-                        }
-                    } else {
-                        Log.d("NFCTAG", "No NDEF messages found!");
-                        if ((access_control & 0x1) == 0x1) {
-                            // .setText("enter" + uid_string + ": ");
-                            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                            NdefMessage msg = createNdefMessage(" " + textTagContent.getText());
-                            //NdefMessage pswd=createNdefMessage(pwd.getText()+"");
-
-                            writeNdefMessage(tag, msg);
-                            //writeNdefMessage(tag,nMesaage);
-                            // writeNdefMessage(tag,pswd);
-                        }
-
-                    }
                 }
             }
 
