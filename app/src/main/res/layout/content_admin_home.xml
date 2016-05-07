@@ -76,6 +76,15 @@
         android:layout_below="@+id/AdminHomeActivityB2"
         android:layout_centerHorizontal="true"
         android:onClick="onClickAdminHomeActivityWriteTag"/>
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/AdminHomeActivityBCreate"
+        android:textAlignment="center"
+        android:id="@+id/AdminHomeActivityBCreate"
+        android:layout_below="@+id/AdminHomeActivityB3"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickAdminHomeActivityCreateTag"/>
 
     <Button
         android:layout_width="220dp"
@@ -83,7 +92,7 @@
         android:text="@string/AdminHomeActivityB4"
         android:textAlignment="center"
         android:id="@+id/AdminHomeActivityB4"
-        android:layout_below="@+id/AdminHomeActivityB3"
+        android:layout_below="@+id/AdminHomeActivityBCreate"
         android:layout_centerHorizontal="true"
         android:onClick="onClickAdminHomeActivityListUsers"/>
 

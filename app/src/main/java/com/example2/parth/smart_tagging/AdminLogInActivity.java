@@ -27,12 +27,13 @@ public class AdminLogInActivity extends AppCompatActivity{
 
     private Intent intent;
     private EditText ET1,ET2,ET3;
-    private String username,password,environment,new_username,new_password,new_environment;
-    private Firebase reference,reference_environment,reference_username,reference_password;
-    private Map<String,Object> fetcher1,fetcher2,fetcher3;
+    private String username,password,environment,new_username,new_password,new_environment,Language, String_ui;
+    private  int encryption,voice;
+    private Firebase reference,reference_environment,reference_username,reference_password,reference_template;
+    private Map<String,Object> fetcher1,fetcher2,fetcher3,fetchertp;
     private long counter1,counter2,counter3,counter4 = 0;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences,sharedPreferences1;
+    private SharedPreferences.Editor editor,editor1;
 
 
     @Override
@@ -63,7 +64,7 @@ public class AdminLogInActivity extends AppCompatActivity{
 
 
     public void onClickAdminHomeActivity(View view){
-        environment = (ET1.getText()).toString();
+        environment = "Mobile_235";
         username = (ET2.getText()).toString();
         password = (ET3.getText()).toString();
         reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/");
@@ -79,9 +80,14 @@ public class AdminLogInActivity extends AppCompatActivity{
                     new_environment = resultDataSnapshot.getKey();
                     if(new_environment.equals(environment)){
                         String latest_path = environment + "/Users_List/";
+                        String template_path=environment+"/Template/";
                         reference_username = reference.child(latest_path);
+                        reference_template=reference.child(template_path);
                         fetcher2 = new HashMap<String,Object>();
+                        fetchertp=new HashMap<String, Object>();
+                        fetchertp.put("fetcher","");
                         fetcher2.put("fetcher"," ");
+                        reference_template.updateChildren(fetchertp);
                         reference_username.updateChildren(fetcher2);
                         reference_username.addValueEventListener(new ValueEventListener(){
                             @Override
@@ -130,6 +136,29 @@ public class AdminLogInActivity extends AppCompatActivity{
                             @Override
                             public void onCancelled(FirebaseError firebaseError){
                                 //nothing to do here . . .
+                            }
+                        });
+                        reference_template.addValueEventListener(new ValueEventListener(){
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                encryption=dataSnapshot.child("Encryption").getValue(Integer.class);
+                                voice=dataSnapshot.child("Voice").getValue(Integer.class);
+                                String_ui=dataSnapshot.child("String ui").getValue(String.class);
+                                Language=dataSnapshot.child("Language").getValue(String.class);
+                                sharedPreferences1 = getSharedPreferences("Smart_Tagging",Context.MODE_PRIVATE);
+                                editor1 = sharedPreferences1.edit();
+                                editor1.putString("String ui",String_ui);
+                                editor1.putString("Language",Language);
+                                editor1.putInt("Voice",voice);
+                                editor1.putInt("Encryption",encryption);
+                                editor1.apply();
+                                Toast.makeText(AdminLogInActivity.this,"Voice: "+voice,Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
                             }
                         });
                     }

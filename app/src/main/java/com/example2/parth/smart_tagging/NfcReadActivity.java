@@ -3,8 +3,10 @@ package com.example2.parth.smart_tagging;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.nfc.NdefMessage;
@@ -27,11 +29,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.firebase.client.Firebase;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import javax.crypto.BadPaddingException;
@@ -45,7 +54,7 @@ public class NfcReadActivity extends Activity {
         Locale myLocale;
         NfcAdapter nfcAdapter;
         byte access_control;
-        String uid_string;
+        String uid_string,language;
         int speak;
         int encryption;
         int nfcFormat = 0;
@@ -65,6 +74,11 @@ public class NfcReadActivity extends Activity {
         Long children;
         Long counters,count;
         String counter;
+        String Id,env,LogKey,LogValue,uname;
+        private Map<String,Object> fetcher2;
+        private Firebase reference_logs;
+    SimpleDateFormat s,s1;
+    private SharedPreferences sharedPreferences1;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -73,12 +87,19 @@ public class NfcReadActivity extends Activity {
             nfcAdapter = NfcAdapter.getDefaultAdapter(this);
            // textTagContent = (EditText) findViewById(R.id.textTagContent);
             textView1 = (TextView) findViewById(R.id.textView1);
+            sharedPreferences1 = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
+            Firebase.setAndroidContext(this);
             setLocale("en");
             access_control = 0xf;
             //access_control=0xe;
-            uid_string = "Patient ID";
-            speak = 1;
-            encryption = 0;
+            env=sharedPreferences1.getString("environment",null);
+            uname=sharedPreferences1.getString("username",null);
+            language=sharedPreferences1.getString("Language",null);
+            uid_string = sharedPreferences1.getString("String ui",null);;
+            speak = sharedPreferences1.getInt("Voice",0);
+            //speak=sharedPreferences.getInt("Voice");
+            Toast.makeText(this,"Speak: "+speak,Toast.LENGTH_SHORT).show();
+            encryption = sharedPreferences1.getInt("Encryption",0);
             b=getIntent().getExtras();
 
             //ii=getIntent();
@@ -154,7 +175,7 @@ public class NfcReadActivity extends Activity {
             Log.d("NFCTAG", " intent");
             String writeText;
 
-            textTagContentRead=(EditText)findViewById(R.id.textTagContentRead);
+            textTagContentRead=(EditText)findViewById(R.id.textTagContentCreate);
             if (intent.hasExtra(NfcAdapter.EXTRA_TAG)) {
                 Log.d("NFCTAG", "NfcIntent!");
 
@@ -226,7 +247,7 @@ public class NfcReadActivity extends Activity {
         private String readTextFromMessage(NdefMessage ndefMessage) throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
 
             NdefRecord[] ndefRecords = ndefMessage.getRecords();
-
+            StringTokenizer st,st1;
             if (ndefRecords != null && ndefRecords.length > 0) {
 
                 NdefRecord ndefRecord = ndefRecords[0];
@@ -239,6 +260,26 @@ public class NfcReadActivity extends Activity {
                 // Log.d("NFCTAG after decrypt", tagContentDecrypt);
 
                 // return tagContentDecrypt;
+
+
+                st=new StringTokenizer(tagContent,"\n");
+
+                    st1=new StringTokenizer(st.nextToken(),":");
+
+                    Log.d("InsideToken:",st1.nextToken());
+                    Id=st1.nextToken();
+                    Log.d("Id:",Id);
+                reference_logs=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(Id).child("Logs");
+                fetcher2=new HashMap<String, Object>();
+                s1=new SimpleDateFormat("dMyyhms");
+                s=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                LogKey="Log "+s1.format(new Date());
+                LogValue="Tag Read at: "+s.format(new Date())+" by "+uname;
+                s.format(new Date());
+                fetcher2.put(LogKey,LogValue);
+                reference_logs.updateChildren(fetcher2);
+
+               // Log.d("Tokens",st.nextToken());
                 return tagContent;
 
             } else {

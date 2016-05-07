@@ -88,6 +88,10 @@ public class AdminHomeActivity extends AppCompatActivity{
         intent = new Intent(AdminHomeActivity.this,ApplicationLogoutActivity.class);
         startActivity(intent);
     }
+    public void onClickAdminHomeActivityCreateTag(View view){
+        intent =new Intent(AdminHomeActivity.this, NfcCreateTag.class);
+        startActivity(intent);
 
+    }
 
 }
