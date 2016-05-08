@@ -1,13 +1,32 @@
 package com.example2.parth.smart_tagging;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.TextView;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ViewTagLogsActivity extends AppCompatActivity {
+    TextView tagId,tagLog;
+    SharedPreferences sharedPreferencesReadLog;
+    String tagIdent,env;
+    Firebase referenceTagLog;
+    Map<String,Object> fetcherLog;
+    String tagLogsData="",logValue;
+    StringBuffer tagLogData=new StringBuffer("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +34,13 @@ public class ViewTagLogsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_tag_logs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Firebase.setAndroidContext(this);
+        tagId=(TextView)findViewById(R.id.textViewtagId);
+        tagLog=(TextView)findViewById(R.id.textViewtagLog);
+        tagLog.setMovementMethod(new ScrollingMovementMethod());
+        sharedPreferencesReadLog = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
+        tagIdent=sharedPreferencesReadLog.getString("TagId",null);
+        env=sharedPreferencesReadLog.getString("environment",null);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +49,33 @@ public class ViewTagLogsActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        tagId.setText("Logs of "+tagIdent);
+        referenceTagLog=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(tagIdent).child("Logs");
+       fetcherLog=new HashMap<String, Object>();
+        fetcherLog.put("fetcher","");
+        referenceTagLog.updateChildren(fetcherLog);
+        referenceTagLog.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               // tagLogsData= new String[(int) dataSnapshot.getChildrenCount()];
+                int i=0;
+                for(DataSnapshot resultDataSnapShot:dataSnapshot.getChildren()){
+
+                    logValue=resultDataSnapShot.getValue().toString();
+                    tagLogData=tagLogData.append(logValue);
+                    tagLogData=tagLogData.append("\n\n");
+                   // i++;
+                }
+                tagLog.setText(tagLogData);
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
     }
 
 }

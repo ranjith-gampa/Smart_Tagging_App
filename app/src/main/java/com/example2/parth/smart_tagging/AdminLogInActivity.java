@@ -29,11 +29,11 @@ public class AdminLogInActivity extends AppCompatActivity{
     private EditText ET1,ET2,ET3;
     private String username,password,environment,new_username,new_password,new_environment,Language, String_ui;
     private  int encryption,voice;
-    private Firebase reference,reference_environment,reference_username,reference_password,reference_template;
-    private Map<String,Object> fetcher1,fetcher2,fetcher3,fetchertp;
+    private Firebase reference,reference_environment,reference_username,reference_password,reference_template,reference_access;
+    private Map<String,Object> fetcher1,fetcher2,fetcher3,fetchertp,fetcherAC;
     private long counter1,counter2,counter3,counter4 = 0;
-    private SharedPreferences sharedPreferences,sharedPreferences1;
-    private SharedPreferences.Editor editor,editor1;
+    private SharedPreferences sharedPreferences,sharedPreferences1,sharedPreferences2;
+    private SharedPreferences.Editor editor,editor1,editor2;
 
 
     @Override
@@ -69,8 +69,11 @@ public class AdminLogInActivity extends AppCompatActivity{
         password = (ET3.getText()).toString();
         reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/");
         reference_environment = reference.child("Applications_List");
+
         fetcher1 = new HashMap<String,Object>();
+
         fetcher1.put("fetcher","fetch");
+
         reference_environment.updateChildren(fetcher1);
         reference_environment.addValueEventListener(new ValueEventListener(){
             @Override
@@ -112,7 +115,29 @@ public class AdminLogInActivity extends AppCompatActivity{
                                                     editor.putString("environment",environment);
                                                     editor.putString("username",username);
                                                     editor.apply();
+                                                    reference_access=reference.child(environment).child("Users_Access").child(username);
                                                     intent = new Intent(AdminLogInActivity.this,UsersLoginService.class);
+                                                    fetcherAC=new HashMap<String, Object>();
+                                                    fetcherAC.put("fetcher","");
+                                                    reference_access.updateChildren(fetcherAC);
+                                                    reference_access.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            //DataSnapshot resultDataSnapShot=dataSnapshot.getChildren();
+                                                            //if((dataSnapshot.getKey()).equals("Access")){
+                                                                sharedPreferences2 = getSharedPreferences("Smart_Tagging",Context.MODE_PRIVATE);
+                                                                editor2 = sharedPreferences2.edit();
+                                                                editor2.putString("Access",dataSnapshot.child("Access").getValue().toString());
+                                                                editor2.apply();
+                                                            //}
+
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(FirebaseError firebaseError) {
+
+                                                        }
+                                                    });
                                                     startService(intent);
                                                 }
                                                 else{
@@ -210,6 +235,14 @@ public class AdminLogInActivity extends AppCompatActivity{
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        editor.clear();
+        editor1.clear();
+        editor2.clear();
     }
 
 

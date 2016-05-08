@@ -29,12 +29,13 @@ public class AdminListUsersActivity extends AppCompatActivity{
     private ListView LV;
     private ArrayAdapter LA;
     private Firebase reference;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences,sharedPreferences1;
     private String username,role,environment,new_username,new_role,user_string,selected_string,final_username;
     private String[] separator;
     private Map<String,Object> map_uro;
     private Intent intent;
     private ArrayList<String> users;
+    private SharedPreferences.Editor editor;
 
 
     @Override
@@ -65,6 +66,7 @@ public class AdminListUsersActivity extends AppCompatActivity{
         LA = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users);
         LV = (ListView) findViewById(R.id.AdminListUsersActivityLV);
         LV.setAdapter(LA);
+        editor=sharedPreferences.edit();
         reference.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
@@ -78,7 +80,9 @@ public class AdminListUsersActivity extends AppCompatActivity{
                         continue;
                     }
                     user_string = new_username + ":" + role;
+
                     users.add(user_string);
+
                     LA.notifyDataSetChanged();
                 }
             }
@@ -96,6 +100,8 @@ public class AdminListUsersActivity extends AppCompatActivity{
                 final_username = separator[0];
                 intent = new Intent(AdminListUsersActivity.this, AdminUserDetailsActivity.class);
                 intent.putExtra("user", final_username);
+                editor.putString("usersName",final_username);
+                editor.apply();
                 startActivity(intent);
             }
         });
@@ -106,6 +112,12 @@ public class AdminListUsersActivity extends AppCompatActivity{
     public void onClickAdminListUsersActivityGoBack(View view){
         finish();
         System.exit(0);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        editor.clear();
     }
 
 

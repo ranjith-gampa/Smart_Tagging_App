@@ -126,6 +126,7 @@
     <string name="AdminUserDetailsUpdateActivityB1">BACK</string>
     <string name="AdminUserDetailsUpdateActivityB2">UPDATE</string>
     <string name="AdminHomeActivityBCreate">Create Tag</string>
+    <string name="AdminUserDetailsActivityMessageBox">Enter Message</string>
 
 
 </resources>

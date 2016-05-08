@@ -18,6 +18,16 @@
 
     </ScrollView>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Logs"
+        android:id="@+id/getLogs"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="122dp"
+        android:onClick="gotoLogs"
+        />
 
 
 </RelativeLayout>

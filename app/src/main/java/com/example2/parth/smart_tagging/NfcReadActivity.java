@@ -78,7 +78,8 @@ public class NfcReadActivity extends Activity {
         private Map<String,Object> fetcher2;
         private Firebase reference_logs;
     SimpleDateFormat s,s1;
-    private SharedPreferences sharedPreferences1;
+    private SharedPreferences sharedPreferences1,sharedPreferencestag;
+    SharedPreferences.Editor editortag;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -88,6 +89,7 @@ public class NfcReadActivity extends Activity {
            // textTagContent = (EditText) findViewById(R.id.textTagContent);
             textView1 = (TextView) findViewById(R.id.textView1);
             sharedPreferences1 = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
+            sharedPreferencestag = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
             Firebase.setAndroidContext(this);
             setLocale("en");
             access_control = 0xf;
@@ -195,6 +197,13 @@ public class NfcReadActivity extends Activity {
                                 } catch (IllegalBlockSizeException e) {
                                     e.printStackTrace();
                                 }
+                                catch (NullPointerException e){
+                                    e.printStackTrace();
+                                }
+                                catch (ArrayIndexOutOfBoundsException e){
+                                    e.printStackTrace();
+                                    Toast.makeText(this,"You do not have permissions to write and empty tag",Toast.LENGTH_SHORT).show();
+                                }
                                 if (encryption == 1) {
                                     Log.d("NFCTAG before decrypt ", readText);
                                     String tagContentDecrypt = null;
@@ -214,19 +223,23 @@ public class NfcReadActivity extends Activity {
                                     }
                                     readText = tagContentDecrypt;
                                 }
-
-                                Log.d("NFCTAG read: ", readText);
-                                //readTextFromMessage((NdefMessage)parcelables[1]);
-                                Log.d("NFCTAG", " after reading1");
-                                textView1.setText(readText);
-                                Log.d("NFCTAG", " after reading2");
-                                if (speak == 1) {
-                                    t1.speak(readText, TextToSpeech.QUEUE_FLUSH, null, null);
+                                try {
+                                    Log.d("NFCTAG read: ", readText);
+                                    //readTextFromMessage((NdefMessage)parcelables[1]);
+                                    Log.d("NFCTAG", " after reading1");
+                                    textView1.setText(readText);
+                                    Log.d("NFCTAG", " after reading2");
+                                    if (speak == 1) {
+                                        t1.speak(readText, TextToSpeech.QUEUE_FLUSH, null, null);
+                                    }
+                                }
+                                catch (NullPointerException e){
+                                    e.printStackTrace();
                                 }
                             }
                         } else {
                             Log.d("NFCTAG", "No NDEF messages found!");
-                            if ((access_control & 0x1) == 0x1) {
+                           /* if ((access_control & 0x1) == 0x1) {
                                 // .setText("enter" + uid_string + ": ");
                                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                                 NdefMessage msg = createNdefMessage(" " + textTagContentRead.getText());
@@ -235,7 +248,8 @@ public class NfcReadActivity extends Activity {
                                 writeNdefMessage(tag, msg);
                                 //writeNdefMessage(tag,nMesaage);
                                 // writeNdefMessage(tag,pswd);
-                            }
+                            }*/
+                            Toast.makeText(this,"Permission Denied to Write and Empty Tag",Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -268,6 +282,9 @@ public class NfcReadActivity extends Activity {
 
                     Log.d("InsideToken:",st1.nextToken());
                     Id=st1.nextToken();
+                editortag=sharedPreferencestag.edit();
+                editortag.putString("TagId",Id);
+                editortag.apply();
                     Log.d("Id:",Id);
                 reference_logs=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(Id).child("Logs");
                 fetcher2=new HashMap<String, Object>();
@@ -507,7 +524,16 @@ public class NfcReadActivity extends Activity {
             // startActivity(refresh);
             // finish();
         }
+        public void gotoLogs(View view){
+            Intent intent=new Intent(this,ViewTagLogsActivity.class);
+            startActivity(intent);
+        }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        editortag.clear();
+    }
 
 
     }

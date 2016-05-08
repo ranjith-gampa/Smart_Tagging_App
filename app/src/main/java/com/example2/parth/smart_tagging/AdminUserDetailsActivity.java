@@ -41,18 +41,22 @@ public class AdminUserDetailsActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         Firebase.setAndroidContext(this);
         sharedPreferences = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
         environment = sharedPreferences.getString("environment", null);
         bundle = getIntent().getExtras();
         user = (bundle.get("user")).toString();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                Intent intent=new Intent(AdminUserDetailsActivity.this,SendMessageActivity.class);
+                startActivity(intent);
+
+            }
+        });
         reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/" + environment + "/Users_Detail/" + user + "/");
         map_udet = new HashMap<String,Object>();
         map_udet.put("fetcher", " ");
