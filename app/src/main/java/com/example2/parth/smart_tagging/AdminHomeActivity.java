@@ -91,7 +91,7 @@ public class AdminHomeActivity extends AppCompatActivity{
         ST2 = (TextView)findViewById(R.id.AdminHomeActivityST2);
         ST1.setText("Hi, " + username);
         ST2.setText("Role: " + role);
-        receivedReference=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("User_Chat").child(username).child("Received");
+        receivedReference=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Users_Chat").child(username).child("Received");
     }
 
 
@@ -103,9 +103,9 @@ public class AdminHomeActivity extends AppCompatActivity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot resultDataSnapshot:dataSnapshot.getChildren()){
-
-                    if(resultDataSnapshot.getKey().equals("fetcher")){
-                        Toast.makeText(AdminHomeActivity.this,"No New Message Found",Toast.LENGTH_SHORT).show();
+                    long ct=resultDataSnapshot.getChildrenCount();
+                    if(ct==1 || resultDataSnapshot.getKey().equals("fetcher")){
+                        //Toast.makeText(AdminHomeActivity.this,"No New Message Found",Toast.LENGTH_SHORT).show();
                     }
                     else {
                         sender=resultDataSnapshot.getKey();
