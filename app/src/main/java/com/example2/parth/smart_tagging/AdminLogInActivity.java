@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -36,7 +37,10 @@ public class AdminLogInActivity extends AppCompatActivity{
     private SharedPreferences sharedPreferences,sharedPreferences1,sharedPreferences2,sharedPreferencesurl;
     private SharedPreferences.Editor editor,editor1,editor2,editorurl;
     String db_url;
+    //static ConnectivityManager cm;
     ConnectivityManager cm;
+    NetworkInfo activeNetwork;
+    boolean isConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -53,10 +57,16 @@ public class AdminLogInActivity extends AppCompatActivity{
                         .setAction("Action", null).show();
             }
         });*/
+       cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if(getSystemService(Context.CONNECTIVITY_SERVICE)==null){
+        activeNetwork = cm.getActiveNetworkInfo();
+        isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(!isConnected){
             Toast.makeText(this,"Check your Internet Connection",Toast.LENGTH_SHORT).show();
         }
+
+
         Firebase.setAndroidContext(this);
         ET1 = (EditText)findViewById(R.id.AdminLogInActivityET1);
         ET2 = (EditText)findViewById(R.id.AdminLogInActivityET2);
