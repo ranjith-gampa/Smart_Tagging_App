@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -27,12 +25,13 @@ public class AdminHomeActivity extends AppCompatActivity{
 
 
     private Intent intent;
-    private String username,role,env,sender,msg,access;
+    private String username,role,env,sender,msg,access,db_url;
     private TextView ST1,ST2;
     private SharedPreferences sharedPreferences;
     Firebase receivedReference;
     Map<String,Object> receivedFetcher;
     Button createuser,read,write,createtag,listusers,viewlogs,updatepwd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -40,14 +39,14 @@ public class AdminHomeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_admin_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         Firebase.setAndroidContext(this);
         createuser=(Button)findViewById(R.id.AdminHomeActivityB1);
         read=(Button)findViewById(R.id.AdminHomeActivityB2);
@@ -63,6 +62,7 @@ public class AdminHomeActivity extends AppCompatActivity{
         env=sharedPreferences.getString("environment",null);
         role = sharedPreferences.getString("role",null);
         access=sharedPreferences.getString("Access",null);
+        db_url=sharedPreferences.getString("firebasedbirl",null);
 
         if(access.equals("0x2")){
             read.setVisibility(View.INVISIBLE);
@@ -72,18 +72,18 @@ public class AdminHomeActivity extends AppCompatActivity{
             viewlogs.setVisibility(View.INVISIBLE);
             updatepwd.setVisibility(View.INVISIBLE);
         }
-        if(access.equals("0x4")){
-            createtag.setVisibility(View.VISIBLE);
+        else if(access.equals("0x4")){
+            createtag.setVisibility(View.INVISIBLE);
             write.setVisibility(View.INVISIBLE);
             createuser.setVisibility(View.INVISIBLE);
             listusers.setVisibility(View.INVISIBLE);
             viewlogs.setVisibility(View.INVISIBLE);
             updatepwd.setVisibility(View.INVISIBLE);
         }
-        if(access.equals("0x8")){
+        else if(access.equals("0x8")){
             createtag.setVisibility(View.INVISIBLE);
             createuser.setVisibility(View.INVISIBLE);
-            listusers.setVisibility(View.INVISIBLE);
+
             viewlogs.setVisibility(View.INVISIBLE);
             updatepwd.setVisibility(View.INVISIBLE);
         }
@@ -156,7 +156,7 @@ public class AdminHomeActivity extends AppCompatActivity{
 
 
     public void onClickAdminHomeActivityUpdatePassword(View view){
-        intent = new Intent(AdminHomeActivity.this,UpdatePasswordActivity.class);
+        intent = new Intent(AdminHomeActivity.this,NfcClearTag.class);
         startActivity(intent);
     }
 

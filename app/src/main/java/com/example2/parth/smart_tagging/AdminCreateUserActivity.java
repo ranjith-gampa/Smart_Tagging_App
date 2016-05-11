@@ -24,8 +24,8 @@ public class AdminCreateUserActivity extends AppCompatActivity{
 
     private EditText ET1,ET2,ET3,ET4,ET5,ET6,ET7;
     private RadioGroup RG1,RG2;
-    private RadioButton RG1RB1,RG1RB2,RG1RB3,RG2RB1,RG2RB2,RG2RB3;
-    private String firstname,lastname,mail,password,username,phone,role,sector1,sector2,environment;
+    private RadioButton RG1RB1,RG1RB2,RG1RB3,RG2RB1,RG2RB2,RG2RB3,RG1RB4;
+    private String firstname,lastname,mail,password,username,phone,role,Access,sector2,environment;
     private int selectID1,selectID2;
     private Firebase reference,ref_uac,ref_ucr,ref_ude,ref_uli,ref_uro;
     private SharedPreferences sharedPreferences;
@@ -39,14 +39,14 @@ public class AdminCreateUserActivity extends AppCompatActivity{
         setContentView(R.layout.activity_admin_create_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         Firebase.setAndroidContext(this);
         ET1 = (EditText)findViewById(R.id.AdminCreateUserActivityET1);
         ET2 = (EditText)findViewById(R.id.AdminCreateUserActivityET2);
@@ -56,13 +56,11 @@ public class AdminCreateUserActivity extends AppCompatActivity{
         ET6 = (EditText)findViewById(R.id.AdminCreateUserActivityET6);
         ET7 = (EditText)findViewById(R.id.AdminCreateUserActivityET7);
         RG1 = (RadioGroup)findViewById(R.id.AdminCreateUserActivityRG1);
-        RG2 = (RadioGroup)findViewById(R.id.AdminCreateUserActivityRG2);
+        //RG2 = (RadioGroup)findViewById(R.id.AdminCreateUserActivityRG2);
         RG1RB1 = (RadioButton)findViewById(R.id.AdminCreateUserActivityRG1RB1);
         RG1RB2 = (RadioButton)findViewById(R.id.AdminCreateUserActivityRG1RB2);
         RG1RB3 = (RadioButton)findViewById(R.id.AdminCreateUserActivityRG1RB3);
-        RG2RB1 = (RadioButton)findViewById(R.id.AdminCreateUserActivityRG2RB1);
-        RG2RB2 = (RadioButton)findViewById(R.id.AdminCreateUserActivityRG2RB2);
-        RG2RB3 = (RadioButton)findViewById(R.id.AdminCreateUserActivityRG2RB3);
+       RG1RB4=(RadioButton)findViewById(R.id.AdminCreateUserActivityRG1RB4);
     }
 
 
@@ -84,15 +82,20 @@ public class AdminCreateUserActivity extends AppCompatActivity{
             password = (ET6.getText()).toString();
             selectID1 = RG1.getCheckedRadioButtonId();
             if (selectID1 == RG1RB1.getId()){
-                sector1 = "R";
+                Access = "0x4";
             } else if (selectID1 == RG1RB2.getId()){
-                sector1 = "W";
+                Access = "0x8";
             } else if (selectID1 == RG1RB3.getId()){
-                sector1 = "RW";
-            } else {
-                sector1 = null;
+                Access = "0x2";
             }
-            selectID2 = RG2.getCheckedRadioButtonId();
+            else if (selectID1==RG1RB4.getId()){
+                Access="0x1";
+            }
+            else {
+                Access = null;
+            }
+            try{
+                selectID2 = RG2.getCheckedRadioButtonId();
             if (selectID2 == RG2RB1.getId()){
                 sector2 = "R";
             } else if (selectID2 == RG2RB2.getId()){
@@ -102,14 +105,19 @@ public class AdminCreateUserActivity extends AppCompatActivity{
             } else {
                 sector2 = null;
             }
+            }
+            catch (NullPointerException e){
+                e.printStackTrace();
+            }
+
             role = (ET7.getText()).toString();
             reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/" + environment + "/");
             //Setting the value of Users_Access Node.
             ref_uac = reference.child("Users_Access/" + username);
             map_uac = new HashMap<String, Object>();
             map_uac.put("fetcher"," ");
-            map_uac.put("sector-1",sector1);
-            map_uac.put("sector-2",sector2);
+            map_uac.put("Access",Access);
+            //map_uac.put("sector-2",sector2);
             ref_uac.updateChildren(map_uac);
             //Setting the value of Users_Credential Node.
             ref_ucr = reference.child("Users_Credential/" + username);
@@ -126,8 +134,8 @@ public class AdminCreateUserActivity extends AppCompatActivity{
             map_ude.put("mail",mail);
             map_ude.put("phone",phone);
             map_ude.put("role",role);
-            map_ude.put("sector-1",sector1);
-            map_ude.put("sector-2",sector2);
+            map_ude.put("Access",Access);
+            //map_ude.put("sector-2",sector2);
             map_ude.put("username",username);
             ref_ude.updateChildren(map_ude);
             //Setting the value of the Users_List Node.

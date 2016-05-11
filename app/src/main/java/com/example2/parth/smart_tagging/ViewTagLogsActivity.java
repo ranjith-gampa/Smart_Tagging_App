@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -25,7 +26,7 @@ public class ViewTagLogsActivity extends AppCompatActivity {
     String tagIdent,env;
     Firebase referenceTagLog;
     Map<String,Object> fetcherLog;
-    String tagLogsData="",logValue;
+    String tagLogsData="",logValue,db_url;
     StringBuffer tagLogData=new StringBuffer("");
 
     @Override
@@ -35,47 +36,54 @@ public class ViewTagLogsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Firebase.setAndroidContext(this);
-        tagId=(TextView)findViewById(R.id.textViewtagId);
-        tagLog=(TextView)findViewById(R.id.textViewtagLog);
+        tagId = (TextView) findViewById(R.id.textViewtagId);
+        tagLog = (TextView) findViewById(R.id.textViewtagLog);
         tagLog.setMovementMethod(new ScrollingMovementMethod());
         sharedPreferencesReadLog = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
-        tagIdent=sharedPreferencesReadLog.getString("TagId",null);
-        env=sharedPreferencesReadLog.getString("environment",null);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        tagIdent = sharedPreferencesReadLog.getString("TagId", null);
+        env = sharedPreferencesReadLog.getString("environment", null);
+        db_url = sharedPreferencesReadLog.getString("firebasedburl", null);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
-        tagId.setText("Logs of "+tagIdent);
-        referenceTagLog=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(tagIdent).child("Logs");
-       fetcherLog=new HashMap<String, Object>();
-        fetcherLog.put("fetcher","");
-        referenceTagLog.updateChildren(fetcherLog);
-        referenceTagLog.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-               // tagLogsData= new String[(int) dataSnapshot.getChildrenCount()];
-                int i=0;
-                for(DataSnapshot resultDataSnapShot:dataSnapshot.getChildren()){
+        });*/
+        tagId.setText("Logs of " + tagIdent);
+        if (tagIdent != null) {
 
-                    logValue=resultDataSnapShot.getValue().toString();
-                    tagLogData=tagLogData.append(logValue);
-                    tagLogData=tagLogData.append("\n\n");
-                   // i++;
+
+            referenceTagLog = new Firebase(db_url).child(env).child("Tags").child(tagIdent).child("Logs");
+            fetcherLog = new HashMap<String, Object>();
+            fetcherLog.put("fetcher", "");
+            referenceTagLog.updateChildren(fetcherLog);
+            referenceTagLog.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // tagLogsData= new String[(int) dataSnapshot.getChildrenCount()];
+                    int i = 0;
+                    for (DataSnapshot resultDataSnapShot : dataSnapshot.getChildren()) {
+
+                        logValue = resultDataSnapShot.getValue().toString();
+                        tagLogData = tagLogData.append(logValue);
+                        tagLogData = tagLogData.append("\n\n");
+                        // i++;
+                    }
+                    tagLog.setText(tagLogData);
+
                 }
-                tagLog.setText(tagLogData);
 
-            }
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
+                }
+            });
 
-            }
-        });
-
+        }
+        else{
+            Toast.makeText(this,"No Logs found",Toast.LENGTH_SHORT).show();
+        }
     }
-
 }

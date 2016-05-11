@@ -72,7 +72,7 @@ public class NfcWriteActivity extends Activity {
     Bundle b;
     Long children;
     Long counters,count;
-    String counter;
+    String counter,db_url;
     StringTokenizer st,st1;
     String Id,env,LogKey,LogValue,uname;
     private Map<String,Object> fetcher2;
@@ -89,6 +89,7 @@ public class NfcWriteActivity extends Activity {
         Firebase.setAndroidContext(this);
         env=sharedPreferences1.getString("environment",null);
         uname=sharedPreferences1.getString("username",null);
+        db_url=sharedPreferences1.getString("firebasedburl",null);
         textTagContent = (EditText) findViewById(R.id.textTagContent);
         textView1 = (TextView) findViewById(R.id.textView1);
         setLocale("en");
@@ -279,7 +280,7 @@ public class NfcWriteActivity extends Activity {
                         Log.d("InsideToken:",st1.nextToken());
                         Id=st1.nextToken();
                         Log.d("Id:",Id);
-                        reference_logs=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(Id).child("Logs");
+                        reference_logs=new Firebase(db_url).child(env).child("Tags").child(Id).child("Logs");
                         fetcher2=new HashMap<String, Object>();
                         s1=new SimpleDateFormat("dMyyhms");
                         s=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -434,6 +435,7 @@ public class NfcWriteActivity extends Activity {
 
             final byte[] text = content.getBytes("UTF-8");
             final int languageSize = language.length;
+            byte[] applicationrec;
             final int textLength = text.length;
             final ByteArrayOutputStream payload = new ByteArrayOutputStream((1 + languageSize + textLength));
             //payload=new ByteArrayOutputStream()
@@ -442,6 +444,7 @@ public class NfcWriteActivity extends Activity {
             // payload.write();
             payload.write(language, 0, languageSize);
             payload.write(text, 0, textLength);
+            //payload.write(applicationrec,0,);
             //payload.write(text,0,textLength);
 
 
@@ -468,28 +471,6 @@ public class NfcWriteActivity extends Activity {
                 });*/
         return ndefMessage;
     }
-
-    private NdefMessage createNdefMessage1(String content) {
-        Log.d("NFCTAG", "Creating NDef message");
-        String s1 = new String("");
-        String s2 = new String("");
-        NdefRecord[] ndefRecord = new NdefRecord[3];
-        NdefRecord ndefRecord1;
-        StringTokenizer st = new StringTokenizer(content, "/");
-        while (st.hasMoreTokens()) {
-            s1 = st.nextToken();
-            s2 = st.nextToken();
-        }
-        //ndefRecord[0]= createTextRecord(s1);
-        // ndefRecord[1]= createTextRecord(s2);
-        ndefRecord1 = createTextRecord(content);
-
-        NdefMessage ndefMessage = new NdefMessage(new NdefRecord[]{ndefRecord1});
-        //NdefMessage ndefMessage=new NdefMessage(ndefRecord);
-        //new NdefMessage()
-        return ndefMessage;
-    }
-
 
 
 
@@ -518,11 +499,7 @@ public class NfcWriteActivity extends Activity {
         return tagContent;
     }
 
-    public void nfcFormat(View view) {
-        if ((access_control & 0x2) == 0x2) {
-            nfcFormat = 1;
-        }
-    }
+
 
     public void nfcWrite(View view) {
         if ((access_control & 0x8) == 0x8) {

@@ -73,7 +73,7 @@ public class NfcReadActivity extends Activity {
         Bundle b;
         Long children;
         Long counters,count;
-        String counter;
+        String counter,db_url;
         String Id,env,LogKey,LogValue,uname;
         private Map<String,Object> fetcher2;
         private Firebase reference_logs;
@@ -96,6 +96,7 @@ public class NfcReadActivity extends Activity {
             //access_control=0xe;
             env=sharedPreferences1.getString("environment",null);
             uname=sharedPreferences1.getString("username",null);
+            db_url=sharedPreferences1.getString("firebasedburl",null);
             language=sharedPreferences1.getString("Language",null);
             uid_string = sharedPreferences1.getString("String ui",null);;
             speak = sharedPreferences1.getInt("Voice",0);
@@ -163,6 +164,12 @@ public class NfcReadActivity extends Activity {
         }
 
         @Override
+        protected void onStop(){
+            super.onStop();
+
+        }
+
+        @Override
         protected void onPause() {
             super.onPause();
 
@@ -227,7 +234,11 @@ public class NfcReadActivity extends Activity {
                                     Log.d("NFCTAG read: ", readText);
                                     //readTextFromMessage((NdefMessage)parcelables[1]);
                                     Log.d("NFCTAG", " after reading1");
-                                    textView1.setText(readText);
+                                    if(readText.equals("")){
+                                        textView1.setText("Tag EMPTY");
+                                    }
+                                    else
+                                        textView1.setText(readText);
                                     Log.d("NFCTAG", " after reading2");
                                     if (speak == 1) {
                                         t1.speak(readText, TextToSpeech.QUEUE_FLUSH, null, null);
@@ -275,26 +286,31 @@ public class NfcReadActivity extends Activity {
 
                 // return tagContentDecrypt;
 
+                if(tagContent.equals("")){
+                    Toast.makeText(this,"Tag is EMpty",Toast.LENGTH_SHORT).show();
+                    textView1.setText("Tag is EMPTY");
+                }
+                else {
+                    st = new StringTokenizer(tagContent, "\n");
 
-                st=new StringTokenizer(tagContent,"\n");
+                    st1 = new StringTokenizer(st.nextToken(), ":");
 
-                    st1=new StringTokenizer(st.nextToken(),":");
-
-                    Log.d("InsideToken:",st1.nextToken());
-                    Id=st1.nextToken();
-                editortag=sharedPreferencestag.edit();
-                editortag.putString("TagId",Id);
-                editortag.apply();
-                    Log.d("Id:",Id);
-                reference_logs=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/").child(env).child("Patients").child(Id).child("Logs");
-                fetcher2=new HashMap<String, Object>();
-                s1=new SimpleDateFormat("dMyyhms");
-                s=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                LogKey="Log "+s1.format(new Date());
-                LogValue="Tag Read at: "+s.format(new Date())+" by "+uname;
-                s.format(new Date());
-                fetcher2.put(LogKey,LogValue);
-                reference_logs.updateChildren(fetcher2);
+                    Log.d("InsideToken:", st1.nextToken());
+                    Id = st1.nextToken();
+                    editortag = sharedPreferencestag.edit();
+                    editortag.putString("TagId", Id);
+                    editortag.apply();
+                    Log.d("Id:", Id);
+                    reference_logs = new Firebase(db_url).child(env).child("Tags").child(Id).child("Logs");
+                    fetcher2 = new HashMap<String, Object>();
+                    s1 = new SimpleDateFormat("dMyyhms");
+                    s = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                    LogKey = "Log " + s1.format(new Date());
+                    LogValue = "Tag Read at: " + s.format(new Date()) + " by " + uname;
+                    s.format(new Date());
+                    fetcher2.put(LogKey, LogValue);
+                    reference_logs.updateChildren(fetcher2);
+                }
 
                // Log.d("Tokens",st.nextToken());
                 return tagContent;
@@ -525,14 +541,21 @@ public class NfcReadActivity extends Activity {
             // finish();
         }
         public void gotoLogs(View view){
-            Intent intent=new Intent(this,ViewTagLogsActivity.class);
-            startActivity(intent);
+            if(Id!=null) {
+                Intent intent = new Intent(this, ViewTagLogsActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this,"Logs not found",Toast.LENGTH_SHORT);
+            }
         }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        editortag.clear();
+//        editortag.clear();
+        if(editortag!=null)
+        editortag.remove("TagId").commit();
     }
 
 

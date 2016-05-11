@@ -60,6 +60,7 @@
         android:id="@+id/AdminCreateUserActivityET4"
         android:hint="@string/AdminCreateUserActivityET4"
         android:textAlignment="center"
+        android:inputType="number"
         android:layout_below="@+id/AdminCreateUserActivityET3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -80,6 +81,7 @@
         android:id="@+id/AdminCreateUserActivityET6"
         android:hint="@string/AdminCreateUserActivityET6"
         android:textAlignment="center"
+        android:inputType="textPassword"
         android:layout_alignBottom="@+id/AdminCreateUserActivityET5"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
@@ -93,11 +95,12 @@
         android:id="@+id/AdminCreateUserActivityMT1"
         android:layout_below="@+id/AdminCreateUserActivityET5"
         android:layout_alignRight="@+id/AdminCreateUserActivityET5"
-        android:layout_alignEnd="@+id/AdminCreateUserActivityET5"/>
+        android:layout_alignEnd="@+id/AdminCreateUserActivityET5"
+        android:layout_marginRight="25dp" />
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_alignLeft="@+id/AdminCreateUserActivityET6"
         android:layout_alignStart="@+id/AdminCreateUserActivityET6"
         android:layout_alignTop="@+id/AdminCreateUserActivityMT1"
@@ -119,46 +122,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/AdminCreateUserActivityRG1RB3"
             android:text="@string/AdminCreateUserActivityRG1RB3"
+            android:textAlignment="center" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AdminCreateUserActivityRG1RB4"
+            android:text="CLEAR"
             android:textAlignment="center"/>
     </RadioGroup>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/AdminCreateUserActivityMT2"
-        android:textAlignment="center"
-        android:id="@+id/AdminCreateUserActivityMT2"
-        android:layout_below="@+id/AdminCreateUserActivityRG1"
-        android:layout_alignLeft="@+id/AdminCreateUserActivityMT1"
-        android:layout_alignStart="@+id/AdminCreateUserActivityMT1"/>
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:id="@+id/AdminCreateUserActivityRG2"
-        android:layout_below="@+id/AdminCreateUserActivityRG1"
-        android:layout_alignLeft="@+id/AdminCreateUserActivityRG1"
-        android:layout_alignStart="@+id/AdminCreateUserActivityRG1">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/AdminCreateUserActivityRG2RB1"
-            android:text="@string/AdminCreateUserActivityRG2RB1"
-            android:textAlignment="center"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/AdminCreateUserActivityRG2RB2"
-            android:text="@string/AdminCreateUserActivityRG2RB2"
-            android:textAlignment="center"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/AdminCreateUserActivityRG2RB3"
-            android:text="@string/AdminCreateUserActivityRG2RB3"
-            android:textAlignment="center"/>
-    </RadioGroup>
 
 
     <EditText
@@ -167,7 +140,7 @@
         android:id="@+id/AdminCreateUserActivityET7"
         android:hint="@string/AdminCreateUserActivityET7"
         android:textAlignment="center"
-        android:layout_below="@+id/AdminCreateUserActivityRG2"
+        android:layout_below="@+id/AdminCreateUserActivityRG1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
@@ -191,8 +164,8 @@
         android:textAlignment="center"
         android:id="@+id/AdminCreateUserActivityB2"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/AdminCreateUserActivityRG2"
-        android:layout_alignStart="@+id/AdminCreateUserActivityRG2"
+        android:layout_alignLeft="@+id/AdminCreateUserActivityRG1"
+        android:layout_alignStart="@+id/AdminCreateUserActivityRG1"
         android:onClick="onClickAdminCreateUserActivityCreate"/>
 
 

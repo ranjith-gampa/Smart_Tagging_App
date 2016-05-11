@@ -76,7 +76,7 @@ public class NfcCreateTag extends Activity {
     Long children;
     Long counters,count;
     String counter;
-    String env;
+    String env,db_url;
     String LogKey,LogValue;
     SimpleDateFormat s,s1;
     String uname;
@@ -95,6 +95,7 @@ public class NfcCreateTag extends Activity {
         setLocale("en");
         access_control = 0xf;
         uname=sharedPreferences.getString("username",null);
+        db_url=sharedPreferences.getString("firebasedburl",null);
         //access_control=0xe;
         env=sharedPreferences.getString("environment",null);
         uid_string = sharedPreferences.getString("String ui",null);
@@ -192,15 +193,16 @@ public class NfcCreateTag extends Activity {
                     Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                     NdefMessage msg = createNdefMessage(uid_string+" :" + textTagContentCreate.getText());
                     //NdefMessage pswd=createNdefMessage(pwd.getText()+"");
-                    reference=new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/");
+                    reference=new Firebase(db_url);
                     reference_app=reference.child(env);
-                    reference_patients=reference_app.child("Patients/"+textTagContentCreate.getText().toString());
+                    reference_patients=reference_app.child("Tags/"+textTagContentCreate.getText().toString());
                     fetcher1 = new HashMap<String,Object>();
                     fetcher2 = new HashMap<String,Object>();
                     fetcher1.put("fetcher","fetch");
                     fetcher2.put("fetcher","");
                     reference_logs=reference_patients.child("Logs");
                     writeNdefMessage(tag, msg);
+
                     reference_patients.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {

@@ -12,12 +12,12 @@
     <string name="AdminLogInActivityB3">Exit</string>
     <string name="AdminLogInActivityB4">Forgot Credentials</string>
     <string name="AdminLogInActivityLT2">LOG IN</string>
-    <string name="AdminLogInActivityET1">ENVIRONMENT</string>
+    <string name="AdminLogInActivityET1">ORGANIZATION NAME</string>
     <string name="AdminLogInActivityET2">USERNAME</string>
     <string name="AdminLogInActivityET3">PASSWORD</string>
 
 
-    <string name="title_activity_admin_sign_up">AdminSignUpActivity</string>
+    <string name="title_activity_admin_sign_up">Sign Up!</string>
     <string name="AdminSignUpActivityLT1">SIGN UP</string>
     <string name="AdminSignUpActivityET1">FIRST NAME</string>
     <string name="AdminSignUpActivityET2">LAST NAME</string>
@@ -29,12 +29,12 @@
     <string name="AdminSignUpActivityRB1">HOSPITAL</string>
     <string name="AdminSignUpActivityRB2">DATA CENTER</string>
     <string name="AdminSignUpActivityRB3">MUSEUM</string>
-    <string name="AdminSignUpActivityET7">APP NAME</string>
+    <string name="AdminSignUpActivityET7">ORGANIZATION NAME</string>
     <string name="AdminSignUpActivityB1">BACK</string>
     <string name="AdminSignUpActivityB2">SIGN UP</string>
 
 
-    <string name="title_activity_admin_home">AdminHomeActivity</string>
+    <string name="title_activity_admin_home">Home</string>
     <string name="AdminHomeActivityST1"> </string>
     <string name="AdminHomeActivityST2"> </string>
     <string name="AdminHomeActivityST3">HOME</string>
@@ -43,20 +43,20 @@
     <string name="AdminHomeActivityB3">WRITE TAG</string>
     <string name="AdminHomeActivityB4">LIST USERS</string>
     <string name="AdminHomeActivityB5">VIEW TAG LOGS</string>
-    <string name="AdminHomeActivityB6">UPDATE PASSWORD</string>
+    <string name="AdminHomeActivityB6">CLEAR TAG</string>
     <string name="AdminHomeActivityB7">LOG OUT</string>
 
 
-    <string name="title_activity_admin_forgot_credentials">AdminForgotCredentialsActivity</string>
+    <string name="title_activity_admin_forgot_credentials">Forgot Credentials</string>
     <string name="title_activity_users_home">UsersHomeActivity</string>
 
 
-    <string name="title_activity_admin_list_users">AdminListUsersActivity</string>
+    <string name="title_activity_admin_list_users">List Users</string>
     <string name="AdminListUsersActivityLT1">USERS LIST</string>
     <string name="AdminListUsersActivityB1">BACK</string>
 
 
-    <string name="title_activity_admin_create_user">AdminCreateUserActivity</string>
+    <string name="title_activity_admin_create_user">Create User</string>
     <string name="AdminCreateUserActivityLT1">USER INFORMATION</string>
     <string name="AdminCreateUserActivityET1">FIRST NAME</string>
     <string name="AdminCreateUserActivityET2">LAST NAME</string>
@@ -65,11 +65,11 @@
     <string name="AdminCreateUserActivityET5">USERNAME</string>
     <string name="AdminCreateUserActivityET6">PASSWORD</string>
     <string name="AdminCreateUserActivityET7">ROLE</string>
-    <string name="AdminCreateUserActivityMT1">SECTOR-1:  </string>
+    <string name="AdminCreateUserActivityMT1">Access  </string>
     <string name="AdminCreateUserActivityMT2">SECTOR-2:  </string>
-    <string name="AdminCreateUserActivityRG1RB1">R</string>
-    <string name="AdminCreateUserActivityRG1RB2">W</string>
-    <string name="AdminCreateUserActivityRG1RB3">RW</string>
+    <string name="AdminCreateUserActivityRG1RB1">Read</string>
+    <string name="AdminCreateUserActivityRG1RB2">Write</string>
+    <string name="AdminCreateUserActivityRG1RB3">Create</string>
     <string name="AdminCreateUserActivityRG2RB1">R</string>
     <string name="AdminCreateUserActivityRG2RB2">W</string>
     <string name="AdminCreateUserActivityRG2RB3">RW</string>
@@ -77,18 +77,18 @@
     <string name="AdminCreateUserActivityB2">CREATE</string>
 
 
-    <string name="title_activity_application_logout">ApplicationLogoutActivity</string>
+    <string name="title_activity_application_logout">Log Out!</string>
     <string name="ApplicationLogoutActivityLT1">!!! LOGGED OUT !!!</string>
     <string name="ApplicationLogoutActivityB1">LOGIN</string>
     <string name="ApplicationLogoutActivityB2">EXIT</string>
     <string name="ApplicationLogoutActivityMT1">:For Logging In Again:</string>
-    <string name="title_activity_view_tag_logs">ViewTagLogsActivity</string>
+    <string name="title_activity_view_tag_logs">Tag Logs</string>
 
 
-    <string name="title_activity_update_password">UpdatePasswordActivity</string>
+    <string name="title_activity_update_password">Clear Tag</string>
 
 
-    <string name="title_activity_admin_user_details">AdminUserDetailsActivity</string>
+    <string name="title_activity_admin_user_details">User Details</string>
     <string name="AdminUserDetailsActivityLT1">USER DETAILS</string>
     <string name="AdminUserDetailsActivityMT1">First Name:</string>
     <string name="AdminUserDetailsActivityMT2">Last Name:</string>
@@ -111,8 +111,7 @@
     <string name="AdminUserDetailsActivityB3">UPDATE</string>
 
 
-
-    <string name="title_activity_admin_user_details_update">AdminUserDetailsUpdateActivity</string>
+    <string name="title_activity_admin_user_details_update">Update User Info</string>
     <string name="AdminUserDetailsUpdateActivityLT1">UPDATE USER DETAILS</string>
     <string name="AdminUserDetailsUpdateActivityMT1">First Name:</string>
     <string name="AdminUserDetailsUpdateActivityMT2">Last Name:</string>
@@ -127,6 +126,7 @@
     <string name="AdminUserDetailsUpdateActivityB2">UPDATE</string>
     <string name="AdminHomeActivityBCreate">Create Tag</string>
     <string name="AdminUserDetailsActivityMessageBox">Enter Message</string>
+    <string name="title_activity_admin_sign_up2">AdminSignUpActivity2</string>
 
 
 </resources>

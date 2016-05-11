@@ -30,7 +30,7 @@ public class AdminListUsersActivity extends AppCompatActivity{
     private ArrayAdapter LA;
     private Firebase reference;
     private SharedPreferences sharedPreferences,sharedPreferences1;
-    private String username,role,environment,new_username,new_role,user_string,selected_string,final_username;
+    private String username,role,environment,new_username,new_role,user_string,selected_string,final_username,db_url;
     private String[] separator;
     private Map<String,Object> map_uro;
     private Intent intent;
@@ -57,7 +57,8 @@ public class AdminListUsersActivity extends AppCompatActivity{
         environment = sharedPreferences.getString("environment", null);
         username = sharedPreferences.getString("username", null);
         role = sharedPreferences.getString("role",null);
-        reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/" + environment + "/" + "Users_Role/");
+        db_url=sharedPreferences.getString("firebasedburl",null);
+        reference = new Firebase(db_url + environment + "/" + "Users_Role/");
         map_uro = new HashMap<String,Object>();
         map_uro.put("fetcher"," ");
         reference.updateChildren(map_uro);
@@ -79,7 +80,7 @@ public class AdminListUsersActivity extends AppCompatActivity{
                     if (username.equals(new_username) && role.equals(new_role)) {
                         continue;
                     }
-                    user_string = new_username + ":" + role;
+                    user_string = new_username + ":" + new_role;
 
                     users.add(user_string);
 

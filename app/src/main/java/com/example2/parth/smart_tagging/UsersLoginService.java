@@ -20,7 +20,7 @@ import java.util.Map;
 public class UsersLoginService extends IntentService{
 
 
-    private String environment,username,role,sector1,sector2;
+    private String environment,username,role,sector1,sector2,db_url;
     private Map<String,Object> map_uro,map_uac;
     private Firebase reference1,reference2;
     private Intent intentNew;
@@ -39,10 +39,11 @@ public class UsersLoginService extends IntentService{
         sharedPreferences = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         environment = sharedPreferences.getString("environment",null);
+        db_url = sharedPreferences.getString("firebasedburl",null);
         //Toast.makeText(UsersLoginService.this,environment,Toast.LENGTH_SHORT).show(); --> For Debugging.
         username = sharedPreferences.getString("username",null);
         //Toast.makeText(UsersLoginService.this,username,Toast.LENGTH_SHORT).show(); --> For Debugging.
-        reference1 = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/" + environment + "/Users_Access/" + username + "/");
+        reference1 = new Firebase(db_url + environment + "/Users_Access/" + username + "/");
         map_uac = new HashMap<String,Object>();
         map_uac.put("fetcher", " ");
         reference1.updateChildren(map_uac);
@@ -61,7 +62,7 @@ public class UsersLoginService extends IntentService{
                 //Noting to do here . , ,
             }
         });
-        reference2 = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/" + environment + "/Users_Role/" + username + "/");
+        reference2 = new Firebase(db_url + environment + "/Users_Role/" + username + "/");
         map_uro = new HashMap<String,Object>();
         map_uro.put("fetcher"," ");
         reference2.updateChildren(map_uro);
@@ -73,6 +74,11 @@ public class UsersLoginService extends IntentService{
                 editor.putString("role", role);
                 editor.apply();
                 if(role.equals("GA")){
+                    intentNew = new Intent(UsersLoginService.this,AdminHomeActivity.class);
+                    intentNew.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intentNew);
+                }
+                else if(role.equals("USER")){
                     intentNew = new Intent(UsersLoginService.this,AdminHomeActivity.class);
                     intentNew.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentNew);

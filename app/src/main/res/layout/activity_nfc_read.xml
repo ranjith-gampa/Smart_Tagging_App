@@ -14,7 +14,8 @@
             android:hint="Details from tag"
             android:id="@+id/textView1"
             android:height="250dp"
-            android:allowUndo="true" />
+            android:allowUndo="true"
+            android:textSize="30dp"/>
 
     </ScrollView>
 

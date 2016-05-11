@@ -4,6 +4,7 @@ package com.example2.parth.smart_tagging;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,9 +33,10 @@ public class AdminLogInActivity extends AppCompatActivity{
     private Firebase reference,reference_environment,reference_username,reference_password,reference_template,reference_access;
     private Map<String,Object> fetcher1,fetcher2,fetcher3,fetchertp,fetcherAC;
     private long counter1,counter2,counter3,counter4 = 0;
-    private SharedPreferences sharedPreferences,sharedPreferences1,sharedPreferences2;
-    private SharedPreferences.Editor editor,editor1,editor2;
-
+    private SharedPreferences sharedPreferences,sharedPreferences1,sharedPreferences2,sharedPreferencesurl;
+    private SharedPreferences.Editor editor,editor1,editor2,editorurl;
+    String db_url;
+    ConnectivityManager cm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -42,18 +44,27 @@ public class AdminLogInActivity extends AppCompatActivity{
         setContentView(R.layout.activity_admin_log_in);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        db_url=""+"Smart_Tagging/";
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener(){
+/*        fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
+
+        if(getSystemService(Context.CONNECTIVITY_SERVICE)==null){
+            Toast.makeText(this,"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+        }
         Firebase.setAndroidContext(this);
         ET1 = (EditText)findViewById(R.id.AdminLogInActivityET1);
         ET2 = (EditText)findViewById(R.id.AdminLogInActivityET2);
         ET3 = (EditText)findViewById(R.id.AdminLogInActivityET3);
+        sharedPreferencesurl = getSharedPreferences("Smart_Tagging",Context.MODE_PRIVATE);
+        editorurl = sharedPreferencesurl.edit();
+        editorurl.putString("firebasedburl",db_url);
+
     }
 
 
@@ -64,10 +75,11 @@ public class AdminLogInActivity extends AppCompatActivity{
 
 
     public void onClickAdminHomeActivity(View view){
-        environment = "Mobile_235";
+        environment=ET1.getText().toString();
+        //environment = "Mobile_235";
         username = (ET2.getText()).toString();
         password = (ET3.getText()).toString();
-        reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/");
+        reference = new Firebase(db_url);
         reference_environment = reference.child("Applications_List");
 
         fetcher1 = new HashMap<String,Object>();
@@ -243,6 +255,7 @@ public class AdminLogInActivity extends AppCompatActivity{
         editor.clear();
         editor1.clear();
         editor2.clear();
+
     }
 
 

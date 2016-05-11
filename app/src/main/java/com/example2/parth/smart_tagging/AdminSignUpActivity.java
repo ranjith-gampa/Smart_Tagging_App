@@ -1,12 +1,15 @@
 package com.example2.parth.smart_tagging;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -24,11 +27,11 @@ public class AdminSignUpActivity extends AppCompatActivity{
     private EditText ET1,ET2,ET3,ET4,ET5,ET6,ET7;
     private RadioGroup radioGroup;
     private RadioButton RB1,RB2,RB3;
-    private String firstname,lastname,mail,phone,username,password,name,type;
+    private String firstname,lastname,mail,phone,username,password,name,type,db_url,String_ui;
     private int selectedID;
     private Firebase reference,ref,ref_app,ref_temp,ref_ucred,ref_udet,ref_uli,ref_uro,ref_acc;
     private Map<String,Object> map_appli,map_app,map_temp,map_ucred,map_udet,map_uli,map_uro,map_acc;
-
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -36,15 +39,17 @@ public class AdminSignUpActivity extends AppCompatActivity{
         setContentView(R.layout.activity_admin_sign_up);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         Firebase.setAndroidContext(this);
+        sharedPreferences = getSharedPreferences("Smart_Tagging", Context.MODE_PRIVATE);
+        db_url = ""+"Smart_Tagging/";
         ET1 = (EditText)findViewById(R.id.AdminSignUpActivityET1);
         ET2 = (EditText)findViewById(R.id.AdminSignUpActivityET2);
         ET3 = (EditText)findViewById(R.id.AdminSignUpActivityET3);
@@ -75,24 +80,28 @@ public class AdminSignUpActivity extends AppCompatActivity{
         selectedID = radioGroup.getCheckedRadioButtonId();
         if(selectedID == RB1.getId()){
             type = "HO";
+            String_ui="Patient ID";
         }
         else if(selectedID == RB2.getId()){
             type = "DC";
+            String_ui="Asset ID";
         }
         else if(selectedID == RB3.getId()){
             type = "MU";
+            String_ui="Exhibit ID";
         }
         else{
             type = null;
         }
         name = (ET7.getText()).toString();
         //Adding the Environment to Applications List.
-        reference = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/Applications_List/");
+        Log.d("FBs",db_url);
+        reference = new Firebase(db_url +"/Applications_List/");
         map_appli = new HashMap<String,Object>();
         map_appli.put(name,name);
         reference.updateChildren(map_appli);
         //Adding the Environment to Application.
-        ref = new Firebase("https://amber-inferno-6557.firebaseio.com/Smart_Tagging/" + name + "/");
+        ref = new Firebase(db_url + name + "/");
         //Setting the value of Application Node.
         ref_app = ref.child("Application");
         map_app = new HashMap<String,Object>();
@@ -104,6 +113,10 @@ public class AdminSignUpActivity extends AppCompatActivity{
         map_temp = new HashMap<String,Object>();
         map_temp.put("fetcher", " ");
         map_temp.put("type", type);
+        map_temp.put("Voice",1);
+        map_temp.put("Encryption",0);
+        map_temp.put("String ui",String_ui);
+        map_temp.put("Language","en");
         ref_temp.setValue(map_temp);
         //Setting the value of Users_Credential Node.
         ref_ucred = ref.child("Users_Credential/" + username);
@@ -120,8 +133,9 @@ public class AdminSignUpActivity extends AppCompatActivity{
         map_udet.put("mail",mail);
         map_udet.put("phone",phone);
         map_udet.put("role","GA");
-        map_udet.put("sector-1","RW");
-        map_udet.put("sector-2","RW");
+        map_udet.put("Access","0xf");
+        //map_udet.put("sector-1","RW");
+        //map_udet.put("sector-2","RW");
         map_udet.put("username",username);
         ref_udet.setValue(map_udet);
         //Setting the value of Users_List Node.
@@ -140,8 +154,7 @@ public class AdminSignUpActivity extends AppCompatActivity{
         ref_acc = ref.child("Users_Access/" + username);
         map_acc = new HashMap<String,Object>();
         map_acc.put("fetcher"," ");
-        map_acc.put("sector-1","RW");
-        map_acc.put("sector-2","RW");
+        map_acc.put("Access","0xf");
         ref_acc.setValue(map_acc);
         Toast.makeText(AdminSignUpActivity.this,"Signed Up Successfully",Toast.LENGTH_LONG).show();
         intent = new Intent(AdminSignUpActivity.this,AdminLogInActivity.class);

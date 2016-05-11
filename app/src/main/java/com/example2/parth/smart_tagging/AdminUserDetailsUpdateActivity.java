@@ -29,14 +29,14 @@ public class AdminUserDetailsUpdateActivity extends AppCompatActivity{
         setContentView(R.layout.activity_admin_user_details_update);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         Firebase.setAndroidContext(this);
         bundle = getIntent().getExtras();
         updateValues = bundle.getStringArray("update");
